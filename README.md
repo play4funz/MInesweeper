@@ -54,6 +54,7 @@ Step 5: Fine tune on additional functions and beautify the game
 1. I have learned the concepts and terms like export/import from a module to another, arrow functions, eventlistner, forEach and more.
 2. In order to create the tiles unravealing itself till an adjacent mine some considerations are needed to be made.
 3. In making boards with difficulty levels, it helps to separate teh JS files for the main components and reactive components where the main components will be the same for different difficulties but the reactive components have minor differences. having that said by seporating the files we are able to better identify issues easier and clearer.
+4. Typos.
 
 **Breakdown & Analysis of the codes**
 Below is a breakdown and analysis of some of the codes which I have categorised according to the concepts we have covered in class.
