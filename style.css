@@ -41,26 +41,26 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-    border: 2px solid #bbb;
+    border: 2px solid grey;
     user-select: none;
 }
 
 .board > [data-status="hidden"] {
-    background-color: #bbb;
+    background-color: grey;
     user-select: none;
 }
 
 .board > [data-status="hidden"] {
-    background-color: #bbb;
+    background-color: grey;
     cursor: pointer;
 }
 
 .board > [data-status="mine"] {
-    background-color: red;
+    background-color: maroon;
 }
 
 .board > [data-status="marked"] {
-    background-color: yellow;
+    background-color: orange;
 }
 
 .Footer {
