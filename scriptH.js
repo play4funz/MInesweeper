@@ -7,7 +7,7 @@ import {
     revealTile,
     checkWin,
     checkLose,
-} from "./minesweeper.js";
+} from "./main.js";
 
 const BOARD_SIZE = 15;
 const NUMBER_OF_MINES = 40;

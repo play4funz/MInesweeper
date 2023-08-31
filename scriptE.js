@@ -7,16 +7,19 @@ import {
     revealTile,
     checkWin,
     checkLose,
-} from "./minesweeper.js";
+} from "./main.js";
 
+// setting of board size and number of mines 
 const BOARD_SIZE = 8;
 const NUMBER_OF_MINES = 5;
 
+// displays
 const board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
 const boardElement = document.querySelector(".board");
 const minesLeftText = document.querySelector("[data-mine-count]");
 const messageText = document.querySelector(".subtext");
 
+// display left over mines when lost
 board.forEach(row => {
   row.forEach(tile => {
     boardElement.append(tile.element)
@@ -31,7 +34,7 @@ board.forEach(row => {
         });
     });
 });
-
+// listing the mines left counter
 boardElement.style.setProperty("--size", BOARD_SIZE);
 minesLeftText.textContent = NUMBER_OF_MINES;
 
@@ -42,7 +45,7 @@ function listMinesLeft() {
 
     minesLeftText.textContent = NUMBER_OF_MINES - markedTilesCount;
 }
-
+// displaying win/lose message
 function checkGameEnd() {
     const win = checkWin(board);
     const lose = checkLose(board);
@@ -67,7 +70,7 @@ if (lose) {
         
     }
 }
-
+// prevent the game from continuing
 function stopProp(e) {
     e.stopImmediatePropagation();
 }
