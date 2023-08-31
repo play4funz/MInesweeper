@@ -40,7 +40,7 @@ For this game controls wer are employing the use of mouse, left click to mine th
 ![image](https://github.com/play4funz/MInesweeper/assets/141905435/aa623cfa-385f-4c4f-948e-8a86335bd64c)
 
 **Files**
-The plan to build the game with different dificulty levels falls on the use of a main file (minesweeper.js) that renders the main function of the game such as creating the board, randomising the mine placements, revealing the tiles with a flood method, win/lose condition checks and marking the tiles. Subsequent files (Script[].js) denotes the size and number of mines of the game and functions to allow clicks and restarting of game.
+The plan to build the game with different dificulty levels falls on the use of a main file (main.js) that renders the main function of the game such as creating the board, randomising the mine placements, revealing the tiles with a flood method, win/lose condition checks and marking the tiles. Subsequent files (Script[].js) denotes the size and number of mines of the game and functions to allow clicks and restarting of game.
 
 **Approach to Development** 
 i have broken down the project into stages:
