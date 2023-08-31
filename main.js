@@ -15,6 +15,7 @@ export function createBoard(boardSize, numberOfMines) {
         const row = [];
         for (let y = 0; y < boardSize; y++) {
             const element = document.createElement('div');
+            
             //default status of tiles are hidden
             element.dataset.status = TILE_STATUSES.HIDDEN;
             
@@ -22,6 +23,7 @@ export function createBoard(boardSize, numberOfMines) {
                 element,
                 x,
                 y,
+                
                 //set mine position
                 mine: minePositions.some(positionMatch.bind(null, {x, y})),
                 get status() {
@@ -37,59 +39,7 @@ export function createBoard(boardSize, numberOfMines) {
     }
     return board;
 }
-// checking the tiles is marked or hidden 
-export function markTile(tile) {
-    if (
-        tile.status !== TILE_STATUSES.HIDDEN && 
-        tile.status !== TILE_STATUSES.MARKED
-    ) {
-        return;
-    }
-    //setting tile status as marked or removing marked 
-    if (tile.status === TILE_STATUSES.MARKED) {
-        tile.status = TILE_STATUSES.HIDDEN;
-    } else {
-        tile.status = TILE_STATUSES.MARKED;
-    }
-}
-// revealing of tiles
-export function revealTile(board, tile) {
-    if (tile.status !== TILE_STATUSES.HIDDEN) {
-        return;
-    }
-    // check if the tile have mine
-    if (tile.mine) {
-        tile.status = TILE_STATUSES.MINE;
-        return;
-    }
-    // revealing the number of mines nearby
-    tile.status = TILE_STATUSES.NUMBER;
-    const adjacentTiles = nearbyTiles(board, tile);
-    const mines =  adjacentTiles.filter(t => t.mine);
-    // revealing the surrounding tiles till it hit a number
-    if (mines.length === 0) {
-        adjacentTiles.forEach(revealTile.bind(null, board))
-    } else {
-        tile.element.textContent = mines.length;
-    }
-}
 
-// win/lose condition checks
-export function checkWin(board) {
-    return board.every(row => {
-        return row.every(tile => {
-            return tile.status === TILE_STATUSES.NUMBER || (tile.mine && (tile.status === TILE_STATUSES.HIDDEN || tile.status === TILE_STATUSES.MARKED))
-        })
-    })
-}
-// function for if a single mine is revealed the game lose 
-export function checkLose(board) {
-    return board.some(row => {
-        return row.some(tile => {
-            return tile.status === TILE_STATUSES.MINE
-        })
-    });
-}
 // randomise the position of mines
 function getMinePositions(boardSize, numberOfMines) {
     const positions = [];
@@ -107,17 +57,63 @@ function getMinePositions(boardSize, numberOfMines) {
 
     return positions;
 }
+
 // check if position are the same
 function positionMatch(a, b) {
     return a.x === b.x && a.y === b.y
 }
 
+// generates random integer
 function randomNumber(size) {
     return Math.floor(Math.random() * size);
 }
-// revealing nearby tiles without any mines nearby
+
+// to check if the tile is hidden/marked
+export function markTile(tile) {
+    if (
+        tile.status !== TILE_STATUSES.HIDDEN && 
+        tile.status !== TILE_STATUSES.MARKED
+    ) {
+        return;
+    }
+    
+    // if tile is marked change it back to hidden else if it is hidden mark it
+    if (tile.status === TILE_STATUSES.MARKED) {
+        tile.status = TILE_STATUSES.HIDDEN;
+    } else {
+        tile.status = TILE_STATUSES.MARKED;
+    }
+}
+
+// revealing of tiles
+export function revealTile(board, tile) {
+    if (tile.status !== TILE_STATUSES.HIDDEN) {
+        return;
+    }
+    
+    // check if the tile contains a mine
+    if (tile.mine) {
+        tile.status = TILE_STATUSES.MINE;
+        return;
+    }
+    
+    // if the tiles does not contain mine, then reveal the nuuber of adjacent mines
+    tile.status = TILE_STATUSES.NUMBER;
+    const adjacentTiles = nearbyTiles(board, tile);
+    const mines =  adjacentTiles.filter(t => t.mine);
+    
+    // revealing the surrounding tiles till it hit a number
+    if (mines.length === 0) {
+        adjacentTiles.forEach(revealTile.bind(null, board))
+    } else {
+        tile.element.textContent = mines.length;
+    }
+}
+
+// filters out tiles containing mines
 function nearbyTiles(board, { x, y }) {
     const tiles = [];
+    
     // prevent errors at the corner of the board
     for (let xOffset = -1; xOffset <= 1; xOffset++) {
         for (let yOffset = -1; yOffset <= 1; yOffset++) {
@@ -127,4 +123,23 @@ function nearbyTiles(board, { x, y }) {
     }
 
     return tiles;
+}
+
+// win/lose condition checks
+// if all tiles are revealed without mines the game win
+export function checkWin(board) {
+    return board.every(row => {
+        return row.every(tile => {
+            return tile.status === TILE_STATUSES.NUMBER || (tile.mine && (tile.status === TILE_STATUSES.HIDDEN || tile.status === TILE_STATUSES.MARKED))
+        })
+    })
+}
+
+// if a single mine is revealed the game lose 
+export function checkLose(board) {
+    return board.some(row => {
+        return row.some(tile => {
+            return tile.status === TILE_STATUSES.MINE
+        })
+    });
 }

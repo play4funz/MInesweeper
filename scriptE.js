@@ -1,4 +1,4 @@
-// display UI file
+// display file
 
 import {
     TILE_STATUSES,
@@ -9,25 +9,27 @@ import {
     checkLose,
 } from "./main.js";
 
-// setting of board size and number of mines 
+// setting of board size and number of mines and const
 const BOARD_SIZE = 8;
 const NUMBER_OF_MINES = 5;
-
-// displays & selector
 const board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
 const boardElement = document.querySelector(".board");
 const minesLeftText = document.querySelector("[data-mine-count]");
 const messageText = document.querySelector(".subtext");
+const restartButton = document.querySelector(".restart-button");
 
-// setting the board
+// setting the board and clicks functions
 board.forEach(row => {
   row.forEach(tile => {
     boardElement.append(tile.element)
-    //left click function
+    
+    //left click function reveals
     tile.element.addEventListener("click", () => {
       revealTile(board, tile);
       checkGameEnd();
-    }); //right click function
+    }); 
+        
+        //right click function mark
         tile.element.addEventListener("contextmenu", e => {
             e.preventDefault();
             markTile(tile);
@@ -35,10 +37,12 @@ board.forEach(row => {
         });
     });
 });
+
 // listing the mines left counter
 boardElement.style.setProperty("--size", BOARD_SIZE);
 minesLeftText.textContent = NUMBER_OF_MINES;
 
+// calculates the number of mines left to be marked and updates the count display
 function listMinesLeft() {
     const markedTilesCount = board.reduce((count, row) => {
         return count + row.filter(tile => tile.status === TILE_STATUSES.MARKED).length
@@ -46,7 +50,8 @@ function listMinesLeft() {
 
     minesLeftText.textContent = NUMBER_OF_MINES - markedTilesCount;
 }
-// displaying win/lose condition
+
+// checks for win/lose conditions
 function checkGameEnd() {
     const win = checkWin(board);
     const lose = checkLose(board);
@@ -55,10 +60,12 @@ function checkGameEnd() {
         boardElement.addEventListener("click", stopProp, { capture: true });
         boardElement.addEventListener("contextmenu", stopProp, { capture: true });
     }
+
 // display win/lose
 if (win) {
     messageText.textContent = "You Win";
 }
+
 // if lose reveal the tiles with mines 
 if (lose) {
     messageText.textContent = "You Lose";
@@ -72,14 +79,13 @@ if (lose) {
         
     }
 }
-// prevent the game from continuing
+
+// prevent the game from continuing when game ends
 function stopProp(e) {
     e.stopImmediatePropagation();
 }
 
-const restartButton = document.querySelector(".restart-button");
-
-// Function to restart the game
+// Function to restart the game by generating now game board and removes te old tiles and update the display
 function restartGame() {
     const newBoard = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
     board.forEach(row => {
@@ -89,7 +95,7 @@ function restartGame() {
     });
     board.length = 0;
     board.push(...newBoard);
-    messageText.textContent = "";
+    messageText.textContent = ".subtext";
     minesLeftText.textContent = NUMBER_OF_MINES;
 
     board.forEach(row => {
