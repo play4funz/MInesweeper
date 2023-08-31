@@ -58,18 +58,28 @@ Step 5: Fine tune on additional functions and beautify the game
 **Breakdown & Analysis of the codes**
 Below is a breakdown and analysis of some of the codes which I have categorised according to the concepts we have covered in class.
 
-Creating the Board
+**Creating the Board**
 for creation of the board I have decided to seprate the files for a clearer way of identfying errors and for future ease of creation of different diffulties.
+
 ![image](https://github.com/play4funz/MInesweeper/assets/141905435/743a074a-f6dc-4352-9af0-f68515c97694)
+
 For this file i have decided to go with making the game logic and functions. i have first chose to create board and identify the hidden tiles and set the tiles.
 
 ![image](https://github.com/play4funz/MInesweeper/assets/141905435/0ef91b4e-f1a2-4cd4-955e-2f68ceac6fe3)
-For this file i have decided to allow changes made to board size and number of mines for different dificulties. this also have features that intereacts with the HTML file
 
+For this file i have decided to allow changes made to board size and number of mines for different dificulties. this also have features that intereacts with the HTML file.
 
+**Mark and revealing of tiles**
 
+![image](https://github.com/play4funz/MInesweeper/assets/141905435/0b396c90-7f15-4da6-9687-15525706a501)
 
+![image](https://github.com/play4funz/MInesweeper/assets/141905435/4243fa9c-d7b6-4a8d-81df-6cf53f1fc6a0)
 
+![image](https://github.com/play4funz/MInesweeper/assets/141905435/3665d2cc-f6d6-4eed-bb4d-f9e18fe408eb)
+
+**Check win/lose condition**
+
+![image](https://github.com/play4funz/MInesweeper/assets/141905435/8f2afcb6-ed90-4a41-9f73-f8e18be353af)
 
 
 
