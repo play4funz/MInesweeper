@@ -31,8 +31,23 @@ The game is a single-player puzzle game in which the goal is to clear a shaped g
 
 **Deployment**
 The game is deployed on GitHub pages, and you can play the game here:
-https://vercel.com/play4funz/m-inesweeper
-https://github.com/play4funz/MInesweeper
+https://m-inesweeper-git-main-play4funz.vercel.app/
 
 **How to play**
 The player begins by selecting a cell on a board. During the game, the player deduces further cells that are safe to open based on the information provided by the opened cells, iteratively gaining more information to solve the board. The minecount, which is calculated as the total number of mines subtracted by the number of flagged cells (the minecount can be negative if too many flags have been placed), is also provided to the player.
+For this game controls wer are employing the use of mouse, left click to mine the cells, while right click to mark(flag) the cells.
+![image](https://github.com/play4funz/MInesweeper/assets/141905435/aa623cfa-385f-4c4f-948e-8a86335bd64c)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
